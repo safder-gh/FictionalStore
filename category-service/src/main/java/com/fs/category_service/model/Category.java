@@ -1,4 +1,4 @@
-package com.fs.product_service.model;
+package com.fs.category_service.model;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Column;
@@ -7,34 +7,31 @@ import jakarta.persistence.GeneratedValue;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "categories")
+public class Category {
+
     @Id
     @GeneratedValue
-    @Column(name = "product_id", columnDefinition = "UUID", updatable = false, nullable = false)
-    private UUID productId;
-
-    @Column(name = "sku", length = 64, nullable = false, unique = true)
-    private String sku;
+    @Column(name = "category_id", columnDefinition = "UUID", updatable = false, nullable = false)
+    private UUID categoryId;
 
     @Column(name = "name", length = 255, nullable = false)
     private String name;
 
-    @Column(name = "price", precision = 10, scale = 2)
-    private BigDecimal price;
+    @Column(name = "slug", length = 255, nullable = false, unique = true)
+    private String slug;
 
-    @Column(name = "currency", length = 3)
-    private String currency;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "status", nullable = false)
-    private Short status = 1;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Category parent; // Self-referencing relationship
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
