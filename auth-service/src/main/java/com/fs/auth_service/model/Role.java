@@ -1,22 +1,23 @@
 package com.fs.auth_service.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.UUID;
 
 @Entity
-@Table(name = "roles")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "roles")
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer roleId;
 
-    @Column(unique = true, nullable = false)
-    private String name; // e.g. ROLE_ADMIN, ROLE_USER
+    @Id
+    @GeneratedValue
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
+    private String name;
 }

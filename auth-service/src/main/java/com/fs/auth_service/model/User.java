@@ -8,26 +8,30 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue
-    private UUID userId;
+    private UUID id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
     private String passwordHash;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
+    @JoinTable(
+            name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    @Builder.Default // Lombok will still use new HashSet<>() if not provided
     private Set<Role> roles = new HashSet<>();
 }
