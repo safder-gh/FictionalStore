@@ -20,7 +20,7 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterRequest req) {
         var user = authService.register(req.getUsername(), req.getPassword());
         user.setPasswordHash(null); // hide hash in response
