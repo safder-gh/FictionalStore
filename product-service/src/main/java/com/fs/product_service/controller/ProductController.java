@@ -1,10 +1,12 @@
 package com.fs.product_service.controller;
 
 import com.fs.product_service.model.Product;
+import com.fs.product_service.model.ProductImage;
 import com.fs.product_service.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -39,5 +41,11 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable UUID id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("/{productId}/images")
+    public ResponseEntity<List<ProductImage>> uploadProductImages(
+            @PathVariable UUID productId,
+            @RequestPart("files") List<MultipartFile> files) {
+        return ResponseEntity.ok(productService.addImages(productId, files));
     }
 }
