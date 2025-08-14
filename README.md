@@ -5,3 +5,4 @@
 ### Product Service  port 8081
 ### Category Service  port 8082
 ### Static Content  port 8084
+### Static Content  port 8085
