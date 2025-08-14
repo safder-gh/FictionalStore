@@ -20,11 +20,12 @@ public class JwtAuthGlobalFilter implements GlobalFilter {
     @Autowired
     private AuthFeignClient authFeignClient;
 
-    @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+
+    public Mono<Void> filter2(ServerWebExchange exchange, GatewayFilterChain chain) {
         return chain.filter(exchange);
     }
-    public Mono<Void> filter2(ServerWebExchange exchange, GatewayFilterChain chain) {
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
 
         String path = exchange.getRequest().getURI().getPath();

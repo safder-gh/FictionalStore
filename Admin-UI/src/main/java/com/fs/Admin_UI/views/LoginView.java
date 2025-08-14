@@ -2,6 +2,7 @@ package com.fs.Admin_UI.views;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fs.Admin_UI.HttpService.UserHttpService;
 import com.fs.Admin_UI.model.UserSession;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -18,13 +19,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-@Route("app-login")
+@Route("login")
 public class LoginView extends VerticalLayout {
 
     private final TextField username = new TextField("Username");
     private final PasswordField password = new PasswordField("Password");
     private final Button loginButton = new Button("Login");
-
+    private final UserHttpService httpService = new UserHttpService();
     public LoginView() {
         // Take full screen
         setSizeFull();
@@ -80,7 +81,7 @@ public class LoginView extends VerticalLayout {
             );
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://127.0.0.1:8080/AUTH-SERVICE/api/auth/login"))
+                    .uri(URI.create("http://127.0.0.1:8080/auth-service/api/auth/login"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(body))
                     .build();

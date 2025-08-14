@@ -32,7 +32,7 @@ public class AuthController {
         String token = authService.login(req.getUsername(), req.getPassword());
         return ResponseEntity.ok().body(java.util.Map.of("token", token));
     }
-    @PostMapping("/api/auth/validate")
+    @PostMapping("/validate")
     public Map<String, Object> validateToken(@RequestBody Map<String, String> request) {
         String token = request.get("token");
         // validate token...
@@ -41,5 +41,8 @@ public class AuthController {
                 "roles", List.of("ROLE_ADMIN", "ROLE_USER")
         );
     }
-
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(authService.getAllUsers());
+    }
 }

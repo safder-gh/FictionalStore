@@ -9,6 +9,6 @@ import java.util.Map;
 @FeignClient(name = "auth-service")
 public interface AuthFeignClient {
 
-    @PostMapping("/auth/validate")
+    @PostMapping("/api/auth/validate")
     Map<String, Object> validateToken(@RequestBody Map<String, String> request);
 }

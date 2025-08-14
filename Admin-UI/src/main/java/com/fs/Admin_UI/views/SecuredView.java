@@ -12,9 +12,9 @@ import com.vaadin.flow.server.VaadinSession;
 public abstract class SecuredView extends AppLayout implements BeforeEnterObserver {
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        UserSession userSession = VaadinSession.getCurrent().getAttribute(UserSession.class);
-        if (userSession == null || userSession.getJwtToken() == null) {
-            event.forwardTo(LoginView.class);
-        }
+//        UserSession userSession = VaadinSession.getCurrent().getAttribute(UserSession.class);
+//        if (userSession == null || userSession.getJwtToken() == null) {
+//            event.forwardTo(LoginView.class);
+//        }
     }
 }

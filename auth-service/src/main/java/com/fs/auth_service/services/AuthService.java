@@ -47,4 +47,8 @@ public class AuthService {
         List<String> roles = user.getRoles().stream().map(Role::getName).collect(Collectors.toList());
         return jwtUtil.generateToken(user.getUsername(), roles);
     }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }
