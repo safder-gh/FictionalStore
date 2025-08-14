@@ -1,5 +1,6 @@
 package com.fs.Admin_UI.views;
 
+import com.fs.Admin_UI.model.UserSession;
 import com.fs.Admin_UI.services.SecurityService;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -7,10 +8,11 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.server.VaadinSession;
 
 //import javax.swing.text.html.ListView;
 
-public class MainLayout extends AppLayout {
+public class MainLayout extends SecuredView {
 private SecurityService securityService;
     public MainLayout(SecurityService securityService) {
         this.securityService = securityService;
@@ -19,10 +21,11 @@ private SecurityService securityService;
     }
 
     private void createHeader() {
+        UserSession userSession = VaadinSession.getCurrent().getAttribute(UserSession.class);
         H1 logo = new H1("Fictional Store Admin Panel");
         logo.addClassNames("text-l", "m-m");
-        Button logOut = new Button("Logout",e ->  {
-            securityService.logout();
+        Button logOut = new Button("Logout "+userSession.getUsername(),e ->  {
+
         }  );
         HorizontalLayout header = new HorizontalLayout(
                 new DrawerToggle(),
